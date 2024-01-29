@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -11,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css',
 })
@@ -49,6 +50,8 @@ export class RegistrationComponent {
   registerSubmited() {
     const formData = this.registerForm.value;
 
+    // Check if the email is already registered
+
     // Store the form data in local storage
     localStorage.setItem('userData', JSON.stringify(formData));
 
@@ -68,17 +71,6 @@ export class RegistrationComponent {
       this.userData = JSON.parse(localData);
     }
   }
-
-  // Form = {
-  //   name: '',
-  //   email: '',
-  //   password: ''
-  // };
-
-  // loginObj: any = {
-  //   email: '',
-  //   password: ''
-  // };
 
   get control() {
     return this.registerForm.controls;
