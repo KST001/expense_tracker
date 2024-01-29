@@ -1,1 +1,167 @@
-<p>registration works!</p>
+<section class="vh-100" style="background-color: #eee">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                  Registration
+                </p>
+
+                <form
+                  class="mx-1 mx-md-4"
+                  [formGroup]="registerForm"
+                  (ngSubmit)="registerSubmited()"
+                >
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="firstname">Name</label>
+                      <input
+                        type="text"
+                        id="firstname"
+                        class="form-control is-invalid"
+                        [class.is-invalid]="
+                          control['Name'].invalid && control['Name'].touched
+                        "
+                        formControlName="Name"
+                      />
+                      <div class="d-grid">
+                        <span
+                          class="text-danger"
+                          *ngIf="Name.errors?.['required'] && (Name.touched || Name.dirty) "
+                          >Name must be required</span
+                        >
+                        <span
+                          class="text-danger"
+                          *ngIf="Name.errors?.['minlength']  && (Name.touched || Name.dirty) "
+                          >Name must be 4 character</span
+                        >
+                        <span
+                          class="text-danger"
+                          *ngIf="Name.errors?.['pattern']  && (Name.touched || Name.dirty) "
+                          >Name must should start with Alphabet</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        formControlName="Email"
+                        [class.is-invalid]="
+                          control['Email'].invalid && control['Email'].touched
+                        "
+                      />
+                      <span
+                        class="text-danger"
+                        *ngIf="Email.errors?.['required'] && (Email.touched || Email.dirty) "
+                        >Email is Required</span
+                      >
+                      <span
+                        class="text-danger"
+                        *ngIf="Email.errors?.['pattern'] && (Email.touched || Email.dirty) "
+                        >Email is Invalid</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="password">Password</label>
+                      <input
+                        type="text"
+                        id="password"
+                        class="form-control"
+                        formControlName="Password"
+                        [class.is-invalid]="
+                          control['Password'].invalid &&
+                          control['Password'].touched
+                        "
+                      />
+
+                      <div
+                        class="d-grid"
+                        *ngIf="Password.dirty || Password.touched"
+                      >
+                        <span
+                          *ngIf="Password.errors?.['required']"
+                          class="block text-danger"
+                        >
+                          Password is required.
+                        </span>
+                        <span *ngIf="!Password.errors?.['required']">
+                          <span
+                            *ngIf="!Password.value?.match('^(?=.*[A-Z])')"
+                            class="block text-danger"
+                          >
+                            At least one uppercase letter.
+                          </span>
+                          <span
+                            *ngIf="!Password.value?.match('(?=.*[a-z])')"
+                            class="block text-danger"
+                          >
+                            At least one lowercase letter.
+                          </span>
+                          <span
+                            *ngIf="!Password.value?.match('(.*[0-9].*)')"
+                            class="block text-danger"
+                          >
+                            At least one digit.
+                          </span>
+                          <span
+                            *ngIf="!Password.value?.match('(?=.*[!@#$%^&*])')"
+                            class="block text-danger"
+                          >
+                            At least one special character.
+                          </span>
+                          <span
+                            *ngIf="!Password.value?.match('.{8,}')"
+                            class="block text-danger"
+                          >
+                            Password must be at least 8 characters.
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-grid col-6">
+                    <button
+                      type="submit"
+                      [disabled]="registerForm.invalid"
+                      class="btn btn-primary btn-lg"
+                    >
+                      Register
+                    </button>
+                  </div>
+                  <p class="signup-link">
+                    Already have an acount ?
+                    <a routerLink="app-login" href="#" class="signup-link link"
+                      >Login</a
+                    >
+                  </p>
+                </form>
+              </div>
+              <div
+                class="col-md-10 col-lg-6 col-xl-6 d-flex align-items-center order-1 order-lg-2"
+              >
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid"
+                  alt="Sample image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
